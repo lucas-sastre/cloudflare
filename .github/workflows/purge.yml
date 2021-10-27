@@ -5,9 +5,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    # Put other steps here if you'd like, i.e. to build your site, deploy it to a service, etc.
     - name: Purge cache
-      uses: Jonakemon/purge-cache-cloudflare-zone@v1.1.0
+      uses: nathanvaughn/actions-cloudflare-purge@master
+      if: success()
+      # preferred
       with:
-        cloudflareZone: ${{ secrets.CLOUDFLARE_ZONE }}
-        cloudflareApiKey: ${{ secrets.CLOUDFLARE_TOKEN }}
+        cf_zone: ${{ secrets.CLOUDFLARE_ZONE }}
+        cf_auth: ${{ secrets.CLOUDFLARE_TOKEN }}
